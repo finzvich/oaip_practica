@@ -1,0 +1,139 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleAppTest
+{
+    class Hotel
+    {
+        public string HotelName;
+        public int HotelStars;
+        public string description;
+        public Country location;
+        public static List<Hotel> HotelsList = new List<Hotel>();
+        public Hotel(string Name, int NumStar, string Description, Country Location)
+        {
+            HotelName = Name;
+            HotelStars = NumStar;
+            description = Description;
+            location = Location;
+
+        }
+
+        public void Second(List<Hotel> HotelsList, List<Country> CountrysList)
+        {
+            Country selectedcountry = null;
+            Hotel hotel = new Hotel();
+            Console.Write("Enter the name of the hotel: ");
+            hotel.HotelName = Console.ReadLine();
+            Console.Write("Enter the number of stars of the hotel: ");
+            hotel.HotelStars = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter a short description of the hotel: ");
+            hotel.description = Console.ReadLine();
+            Console.Write("Enter the country where the hotel is located: ");
+            string location = Console.ReadLine();
+            foreach (Country c in CountrysList)
+            {
+                if (location == c.name)
+                {
+                    selectedcountry = c;
+                    break;
+                }
+                if (selectedcountry == null)
+                    return;
+            }
+            HotelsList.Add(new Hotel() { HotelName = hotel.HotelName, HotelStars = hotel.HotelStars, description = hotel.description, location = selectedcountry });
+
+        }
+        public void Third()
+        {
+            foreach (Hotel c in HotelsList)
+            {
+                Console.Write(c.HotelName + " ");
+                Console.Write(c.HotelStars + " ");
+                Console.Write(c.description);
+                Console.WriteLine("");
+            }
+        }
+        public Hotel() { }
+
+
+    }
+
+
+    class Country
+    {
+        public string name;
+        public string stol;
+        public static List<Country> CountrysList = new List<Country>();
+        public Country(string Name, string Stolitca)
+        {
+            name = Name;
+            stol = Stolitca;
+        }
+        public void First()
+        {
+            Country country = new Country();
+            Console.Write("Enter the country name: ");
+            country.name = Console.ReadLine();
+            Console.Write("Enter the name of the capital: ");
+            country.stol = Console.ReadLine();
+            CountrysList.Add(new Country() { name = country.name, Stolitca = country.Stolitca });
+        }
+        public void Fouth()
+        {
+            foreach (Country c in CountrysList)
+            {
+                Console.Write(c.name + " ");
+                Console.Write(c.stol);
+                Console.WriteLine("");
+            }
+        }
+        public Country() { }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Hotel hotel = new Hotel();
+            Country country = new Country();
+            int N = 0;
+            while (N != 5)
+            {
+                Console.WriteLine("Select an action");
+                Console.WriteLine("1) Add country");
+                Console.WriteLine("2) Add a hotel");
+                Console.WriteLine("3) Show all hotels");
+                Console.WriteLine("4) Withdrawal of all countries");
+                Console.WriteLine("5) Exiting the program");
+                int n = Convert.ToInt32(Console.ReadLine());
+                    if(n ==1){
+                        country.First();
+                        continue;
+                    }
+                    if(n ==2){
+                        hotel.Second(Hotel.HotelsList, Country.CountrysList);
+                        continue;
+                    }
+                    if(n ==3){
+                        hotel.Third();
+                        continue;
+                    }
+                    if(n ==4){
+                        country.Fouth();
+                        continue;
+                    }
+                    if(n ==5){
+                        N = 5;
+                        break;
+                    else:
+                    }
+                    else
+                        Console.WriteLine("Choose something from the suggested list");
+                        break;
+            }
+        }
+    }
+}
